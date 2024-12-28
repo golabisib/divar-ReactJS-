@@ -1,9 +1,17 @@
+import PropTypes from 'prop-types';
 
+SendOTPForm.propTypes = {
+    setStep: PropTypes.func.isRequired,
+    mobile: PropTypes.string.isRequired,
+    setMobile: PropTypes.func.isRequired,
+};
 
 function SendOTPForm({setStep, mobile, setMobile}) {
     const submitHandler = event => {
         event.preventDefault();
-        console.log(event)}
+        if (mobile.length !== 11) return;
+        setStep(2);
+    }
   return (
     <form onSubmit={submitHandler}>
         <p>ورود به حساب کاربری</p>
