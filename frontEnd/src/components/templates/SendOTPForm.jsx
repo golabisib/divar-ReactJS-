@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import { sendOTP } from '../../services/auth';
+
 SendOTPForm.propTypes = {
     setStep: PropTypes.func.isRequired,
     mobile: PropTypes.string.isRequired,
@@ -7,10 +9,18 @@ SendOTPForm.propTypes = {
 };
 
 function SendOTPForm({setStep, mobile, setMobile}) {
-    const submitHandler = event => {
+    const submitHandler = async (event) => {
         event.preventDefault();
+
         if (mobile.length !== 11) return;
-        setStep(2);
+        const { response, error } = await sendOTP(mobile);
+
+        if(response){
+            setStep(2);
+        }
+        if(error){
+        console.log(error.response.data.message);
+        }
     }
   return (
     <form onSubmit={submitHandler}>

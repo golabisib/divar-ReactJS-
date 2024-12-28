@@ -10,7 +10,8 @@ CheckOTPForm.propTypes = {
 function CheckOTPForm({ code, setCode, mobile, setStep }) {
     const SubmitHandler = event => {
         event.preventDefault();
-        if (code.length !== 6) return;
+        if (code.length !== 5) return;
+        
     }
   return (
     <div>
