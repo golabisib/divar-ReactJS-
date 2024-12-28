@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { checkOTP } from '../../services/auth';
 
 CheckOTPForm.propTypes = {
     code: PropTypes.string.isRequired,
@@ -8,10 +9,16 @@ CheckOTPForm.propTypes = {
 };
 
 function CheckOTPForm({ code, setCode, mobile, setStep }) {
-    const SubmitHandler = event => {
+    const SubmitHandler = async (event) => {
         event.preventDefault();
         if (code.length !== 5) return;
-        
+        const {response, error} = await checkOTP(mobile, code)
+        if(response){
+            console.log(response.data.message);
+        }
+        if(error){
+            console.log(error.response.data.message);
+        }
     }
   return (
     <div>
