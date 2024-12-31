@@ -7,4 +7,14 @@ const setCookie = (tokens) => {
   }`;
 };
 
-export default setCookie;
+const getCookie = (cookieName) => {
+  return document.cookie
+    .split(";")
+    .find((token) => token.trim().split("=")[0] === cookieName)
+    .trim()
+    ?.split("=")[1];
+};
+
+const cookiesUtils = { setCookie, getCookie };
+
+export default cookiesUtils;
