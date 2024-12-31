@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { checkOTP } from '../../services/auth';
-import setCookie from '../../utils/cookie';
+import { checkOTP } from 'services/auth';
+import setCookie from 'src/utils/cookie';
 
 CheckOTPForm.propTypes = {
     code: PropTypes.string.isRequired,

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { sendOTP } from '../../services/auth';
+import { sendOTP } from 'services/auth';
 
 SendOTPForm.propTypes = {
     setStep: PropTypes.func.isRequired,
