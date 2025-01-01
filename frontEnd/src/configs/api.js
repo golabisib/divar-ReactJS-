@@ -14,7 +14,7 @@ api.interceptors.request.use(
   (request) => {
     const accessToken = getCookie("accessToken");
     if (accessToken) {
-      request.headers["Authorization"] = `Bearer ${accessToken}`;
+      request.headers["Authorization"] = `bearer ${accessToken}`;
     }
     return request;
   },
