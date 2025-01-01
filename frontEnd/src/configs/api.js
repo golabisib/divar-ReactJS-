@@ -1,7 +1,9 @@
 import axios from "axios";
+
+import { getNewToken } from "src/services/token";
 import cookiesUtils from "src/utils/cookie";
 
-const { getCookie } = cookiesUtils;
+const { getCookie, setCookie } = cookiesUtils;
 
 const api = axios.create({
   baseURL: "http://localhost:3400/",
@@ -22,4 +24,22 @@ api.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const res = await getNewToken();
+      if(!res?.response) return;
+      setCookie(res.response.data);
+      
+      return api(originalRequest);
+    }
+  }
+);
+
 export default api;
