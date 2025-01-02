@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 
 import { sendOTP } from 'services/auth';
 
+import styles from './SendOTPForm.module.css';
+
 SendOTPForm.propTypes = {
     setStep: PropTypes.func.isRequired,
     mobile: PropTypes.string.isRequired,
@@ -23,7 +25,7 @@ function SendOTPForm({setStep, mobile, setMobile}) {
         }
     }
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className={styles.form}>
         <p>ورود به حساب کاربری</p>
         <span>برای استفاده از امکانات،لطفا شماره تلفن همراه خود را وارد کنید. کد تایید به این شماره پیامک خواهد شد.</span>
         <label htmlFor="input">شماره موبایل خود را وارد کنید.</label>

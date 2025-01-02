@@ -9,6 +9,8 @@ import cookiesUtils from 'src/utils/cookie';
 
 const {setCookie} = cookiesUtils;
 
+import styles from './CheckOTPForm.module.css';
+
 CheckOTPForm.propTypes = {
     code: PropTypes.string.isRequired,
     setCode: PropTypes.func.isRequired,
@@ -36,13 +38,13 @@ function CheckOTPForm({ code, setCode, mobile, setStep }) {
     }
   return (
     <div>
-        <form onSubmit={SubmitHandler}>
+        <form onSubmit={SubmitHandler} className={styles.form}>
             <p>تایید کد پیامک شده.</p>
             <span>کد پیامک شده به شماره |{mobile}| را وارد کنید.</span>
             <label htmlFor="input"> کد تایید را وارد کنید.</label>
             <input type="text" id="input" placeholder="کد تایید" value={code} onChange={e => setCode(e.target.value)} />
             <button type="submit"> ورود</button>
-            <button onClick={() => setStep(1)}>تغییر شماره موبایل</button>
+            <button onClick={() => setStep(1)} className={styles.backButton}>تغییر شماره موبایل</button>
         </form>
     </div>
   )
