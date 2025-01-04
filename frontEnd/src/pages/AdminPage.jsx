@@ -1,8 +1,9 @@
+import CategoryForm from "components/templates/CategoryForm"
 
 function AdminPage() {
   return (
     <div>
-        admin
+        <CategoryForm />
     </div>
   )
 }
