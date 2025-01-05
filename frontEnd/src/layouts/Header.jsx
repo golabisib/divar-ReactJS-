@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 import styles from "./Header.module.css";
-import { useQuery } from "@tanstack/react-query";
+
 import { getProfile } from "src/services/user";
+import cookiesUtils from "src/utils/cookie";
+const { deleteCookie } = cookiesUtils;
+
 
 function Header() {
   const { data } = useQuery(["profile"], getProfile);
@@ -25,17 +29,18 @@ function Header() {
               <p>پنل ادمین</p>
             </span>
           </Link>
-        ) : (
+        ) : ( !data &&
           <Link to="/auth">
             <span>
               <img src="profile.svg" />
-              <p>چیزای من</p>
+              <p>ورود</p>
             </span>
           </Link>
         )}
         <Link to="/dashboard" className={styles.button}>
           ثبت چیز
         </Link>
+      {data && <button onClick={deleteCookie} className={styles.logButton}>خروج</button>}
       </div>
     </header>
   );
