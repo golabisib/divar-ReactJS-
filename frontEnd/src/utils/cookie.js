@@ -14,6 +14,12 @@ const getCookie = (cookieName) => {
     ?.split("=")[1];
 };
 
-const cookiesUtils = { setCookie, getCookie };
+const deleteCookie = () => {
+    document.cookie = `${'accessToken'}=; max-age=0`;
+    document.cookie = `${'refreshToken'}=; max-age=0`;
+    window.location.href = "/auth"
+};
+
+const cookiesUtils = { setCookie, getCookie, deleteCookie };
 
 export default cookiesUtils;

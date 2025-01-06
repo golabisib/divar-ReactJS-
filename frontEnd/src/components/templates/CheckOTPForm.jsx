@@ -42,7 +42,7 @@ function CheckOTPForm({ code, setCode, mobile, setStep }) {
             <p>تایید کد پیامک شده.</p>
             <span>کد پیامک شده به شماره |{mobile}| را وارد کنید.</span>
             <label htmlFor="input"> کد تایید را وارد کنید.</label>
-            <input type="text" id="input" placeholder="کد تایید" value={code} onChange={e => setCode(e.target.value)} />
+            <input type="text" id="input" placeholder="کد تایید" value={code} onChange={e => setCode(e.target.value)} autoComplete='off' />
             <button type="submit"> ورود</button>
             <button onClick={() => setStep(1)} className={styles.backButton}>تغییر شماره موبایل</button>
         </form>
