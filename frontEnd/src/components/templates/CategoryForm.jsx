@@ -1,26 +1,30 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { addCategory } from "src/services/admin";
 
 import styles from "./CategoryForm.module.css";
 
-
 function CategoryForm() {
   const [form, setForm] = useState({ name: "", slug: "", icon: "" });
 
-  const {mutate, isLoading, error, data} = useMutation(addCategory)
-  console.log({isLoading, error, data})
+  const { mutate, isLoading, error, data } = useMutation(addCategory);
+  console.log({ isLoading, error, data });
 
-  const changeHandler = (event) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
-  };
+  const changeHandler = useCallback((event) => {
+    setForm((prevForm) => ({
+      ...prevForm,
+      [event.target.name]: event.target.value,
+    }));
+  }, []);
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    if(!form.name || !form.slug || !form.icon) return;
-    mutate(form)
-  };
+  const submitHandler = useCallback(
+    (event) => {
+        event.preventDefault();
+        if (!form.name || !form.slug || !form.icon) return;
+        mutate(form);
+      },[form, mutate]
+  );
 
   return (
     <form
@@ -40,7 +44,9 @@ function CategoryForm() {
       <label htmlFor="icon">نام آیکون</label>
       <input type="text" name="icon" id="icon" autoComplete="off" />
 
-      <button type="submit" disabled={isLoading}>ایجاد دسته بندی</button>
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? "در حال ارسال..." : "اضافه کردن دسته بندی"}
+      </button>
     </form>
   );
 }
