@@ -1,8 +1,9 @@
+import AddPost from "src/components/templates/AddPost"
 
 function Dashboard() {
   return (
     <div>
-        dashboard 
+        <AddPost />
     </div>
   )
 }
