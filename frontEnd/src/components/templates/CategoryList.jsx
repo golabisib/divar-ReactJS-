@@ -7,7 +7,7 @@ import styles from "./CategoryList.module.css";
 
 function CategoryList() {
   const queryClient = useQueryClient();
-  const { data, isLoading } = useQuery(["get-categories"], getCategory);
+  const { data, isFetching } = useQuery(["get-categories"], getCategory);
 
   const mutation = useMutation(deleteCategory, {
     onSuccess: () => {
@@ -22,7 +22,7 @@ function CategoryList() {
 
   return (
     <div className={styles.list}>
-      {isLoading ? (
+      {isFetching ? (
         <Loader />
       ) : (
         data.data.map((i) => (
