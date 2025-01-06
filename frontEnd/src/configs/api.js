@@ -6,7 +6,7 @@ import cookiesUtils from "src/utils/cookie";
 const { getCookie, setCookie } = cookiesUtils;
 
 const api = axios.create({
-  baseURL: "http://localhost:3400/",
+  baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -36,7 +36,7 @@ api.interceptors.response.use(
       const res = await getNewToken();
       if(!res?.response) return;
       setCookie(res.response.data);
-      
+
       return api(originalRequest);
     }
   }
