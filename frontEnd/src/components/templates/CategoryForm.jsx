@@ -9,7 +9,7 @@ function CategoryForm() {
   const [form, setForm] = useState({ name: "", slug: "", icon: "" });
 
   const { mutate, isLoading, error, data } = useMutation(addCategory);
-  console.log({ isLoading, error, data });
+//   console.log({ isLoading, error, data });
 
   const changeHandler = useCallback((event) => {
     setForm((prevForm) => ({
