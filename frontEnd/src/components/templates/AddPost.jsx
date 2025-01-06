@@ -1,10 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 import { getCategory } from "src/services/admin";
+import cookiesUtils from "src/utils/cookie";
+const { getCookie } = cookiesUtils;
 
-import styles from "./AddPost.module.css"
-
+import styles from "./AddPost.module.css";
 
 function AddPost() {
   const [form, setForm] = useState({
@@ -13,24 +15,40 @@ function AddPost() {
     amount: null,
     city: "",
     category: "",
-    image: null,
+    images: null,
   });
 
   const { data } = useQuery(["get-categories"], getCategory);
-  console.log(data);
+  //   console.log(data);
 
   const changeHandler = (event) => {
     const name = event.target.name;
-    if(name !== "image"){
-        setForm({...form, [name]: event.target.value});
+    if (name !== "image") {
+      setForm({ ...form, [name]: event.target.value });
     } else {
-        setForm({...form, [name]: event.target.files[0]})
+      setForm({ ...form, [name]: event.target.files[0] });
     }
   };
 
-  const addHandler = (event) => {
+  const addHandler = async (event) => {
     event.preventDefault();
-    console.log(form);
+
+    const formData = new FormData();
+    for (let key in form) {
+      formData.append(key, form[key]);
+    }
+    // console.log(formData);
+    const token = getCookie("accessToken");
+
+    axios
+      .post(`http://localhost:3400/post/create`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -38,19 +56,19 @@ function AddPost() {
       <h3>افزودن آگهی</h3>
 
       <label htmlFor="title">عنوان</label>
-      <input type="text" name="title" id="title" />
+      <input type="text" name="title" id="title"  />
 
       <label htmlFor="content">توضیحات</label>
-      <textarea name="content" id="content" />
+      <textarea name="content" id="content"  />
 
       <label htmlFor="amount">قیمت</label>
-      <input type="text" name="amount" id="amount" />
+      <input type="number" name="amount" id="amount"  />
 
       <label htmlFor="city">شهر</label>
       <input type="text" name="city" id="city" />
 
       <label htmlFor="category">دسته بندی</label>
-      <select name="category" id="category">
+      <select name="category" id="category" >
         {data?.data.map((i) => (
           <option key={i._id} value={i._id}>
             {i.name}
@@ -58,8 +76,8 @@ function AddPost() {
         ))}
       </select>
 
-      <label htmlFor="image">عکس</label>
-      <input type="file" name="image" id="image" />
+      <label htmlFor="images">عکس</label>
+      <input type="file" name="images" id="images" />
 
       <button onClick={addHandler}>ایجاد آگهی</button>
     </form>
