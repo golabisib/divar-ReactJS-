@@ -6,6 +6,7 @@ import Router from "./router/Router";
 
 import defaultOptions from "./configs/reactQuery";
 import Layout from "./layouts/Layout";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const queryClient = new QueryClient({ defaultOptions });
@@ -15,6 +16,7 @@ function App() {
       <BrowserRouter>
         <Layout>
           <Router />
+          <Toaster />
         </Layout>
       </BrowserRouter>
       <ReactQueryDevtools />

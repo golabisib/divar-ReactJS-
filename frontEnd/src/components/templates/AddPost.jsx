@@ -7,6 +7,7 @@ import cookiesUtils from "src/utils/cookie";
 const { getCookie } = cookiesUtils;
 
 import styles from "./AddPost.module.css";
+import toast from "react-hot-toast";
 
 function AddPost() {
   const [form, setForm] = useState({
@@ -47,8 +48,8 @@ function AddPost() {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error));
+      .then((res) => toast.success(res.data.message))
+      .catch(() => toast.error("مشکلی پیش آمده است!"));
   };
 
   return (
