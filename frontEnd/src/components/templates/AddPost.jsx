@@ -57,16 +57,16 @@ function AddPost() {
       <h3>افزودن آگهی</h3>
 
       <label htmlFor="title">عنوان</label>
-      <input type="text" name="title" id="title"  />
+      <input type="text" name="title" id="title" autoComplete="off"  />
 
       <label htmlFor="content">توضیحات</label>
-      <textarea name="content" id="content"  />
+      <textarea name="content" id="content"/>
 
       <label htmlFor="amount">قیمت</label>
-      <input type="number" name="amount" id="amount"  />
+      <input type="number" name="amount" id="amount"  autoComplete="off"/>
 
       <label htmlFor="city">شهر</label>
-      <input type="text" name="city" id="city" />
+      <input type="text" name="city" id="city" autoComplete="off" />
 
       <label htmlFor="category">دسته بندی</label>
       <select name="category" id="category" >
