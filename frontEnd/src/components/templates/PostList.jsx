@@ -4,12 +4,12 @@ import { deletePost, getPosts } from "src/services/user";
 import Loader from "../modules/Loader";
 import { sp } from "src/utils/numbers";
 
-import styles from "./PostList.module.css"
+import styles from "./PostList.module.css";
 
 function PostList() {
   const queryClient = useQueryClient();
   const { data, isFetching } = useQuery(["my-post-list"], getPosts);
-//   console.log(data);
+  //   console.log(data);
 
   const mutation = useMutation(deletePost, {
     onSuccess: () => {
@@ -38,7 +38,9 @@ function PostList() {
                   />
                   <div>
                     <p>{post.options.title}</p>
-                    <span>{post.options.content}</span>
+                    <span className={styles.content}>
+                      {post.options.content}
+                    </span>
                   </div>
                   <div className={styles.price}>
                     <p>

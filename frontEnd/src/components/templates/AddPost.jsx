@@ -20,14 +20,14 @@ function AddPost() {
   });
 
   const { data } = useQuery(["get-categories"], getCategory);
-  //   console.log(data);
+    // console.log(data);
 
   const changeHandler = (event) => {
     const name = event.target.name;
-    if (name !== "image") {
-      setForm({ ...form, [name]: event.target.value });
-    } else {
+    if (name === "image" ) {
       setForm({ ...form, [name]: event.target.files[0] });
+         } else {
+      setForm({ ...form, [name]: event.target.value });
     }
   };
 
@@ -36,7 +36,11 @@ function AddPost() {
 
     const formData = new FormData();
     for (let key in form) {
-      formData.append(key, form[key]);
+        if (key === "images" && form[key]) {
+            formData.append("images", form[key]);
+          } else {
+            formData.append(key, form[key]);
+          }
     }
     // console.log(formData);
     const token = getCookie("accessToken");
@@ -70,6 +74,7 @@ function AddPost() {
 
       <label htmlFor="category">دسته بندی</label>
       <select name="category" id="category" >
+        {/* <option disabled selected>انتخاب دسته بندی</option> */}
         {data?.data.map((i) => (
           <option key={i._id} value={i._id}>
             {i.name}
