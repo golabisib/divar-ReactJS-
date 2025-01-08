@@ -25,12 +25,12 @@ function CategoryList() {
       {isFetching ? (
         <Loader />
       ) : (
-        data.data.map((i) => (
-          <div key={i._id}>
-            <img src={`${i.icon}.svg`} alt={i.name} />
-            <h5>{i.name}</h5>
-            <p>slug : {i.slug}</p>
-            <button onClick={() => deleteHandler(i._id)}>حذف</button>
+        data?.data.map((category) => (
+          <div key={category._id}>
+            <img src={`${category.icon}.svg`} alt={category.name} />
+            <h5>{category.name}</h5>
+            <p>slug : {category.slug}</p>
+            <button onClick={() => deleteHandler(category._id)}>حذف</button>
           </div>
         ))
       )}

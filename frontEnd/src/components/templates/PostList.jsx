@@ -30,7 +30,7 @@ function PostList() {
           ) : (
             <>
               <h3>آگهی های من</h3>
-              {data.data.posts.map((post) => (
+              {data?.data.posts.map((post) => (
                 <div key={post._id} className={styles.post}>
                   <img
                     src={`${import.meta.env.VITE_BASE_URL}${post.images[0]}`}
