@@ -1,5 +1,5 @@
 import api from "src/configs/api";
 
-const getAllPost = () => api.get("post").then((res) => res || false);
+const getAllPost = () => api.get("").then((res) => res || false);
 
 export { getAllPost };
